@@ -19,6 +19,11 @@ export const selectFilter = state => {
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectFilter],
   (contacts, filter) => {
+    // Перевіряємо, чи contacts є масивом перед використанням filter
+    if (!Array.isArray(contacts)) {
+      return [];
+    }
+
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
